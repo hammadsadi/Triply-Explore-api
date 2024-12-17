@@ -23,6 +23,51 @@ const userCreate = async (req: Request, res: Response) => {
   }
 };
 
+/**
+ * @Desc Get All User Controller
+ * @Param ""
+ * @Method GET
+ */
+const userGet = async (req: Request, res: Response) => {
+  try {
+    const result = await UserServices.allUserFromDB();
+    res.json({
+      success: true,
+      message: 'User Get Successful',
+      data: result,
+    });
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      message: 'Something Wrong',
+      error,
+    });
+  }
+};
+
+/**
+ * @Desc Get Singlr User Controller
+ * @Param ID
+ * @Method GET
+ */
+const singleUserGet = async (req: Request, res: Response) => {
+  try {
+    const result = await UserServices.singleUserFromDB(req.params.id);
+    res.json({
+      success: true,
+      message: 'Single User Get Successful',
+      data: result,
+    });
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      message: 'Something Wrong',
+      error,
+    });
+  }
+};
 export const UserControllers = {
   userCreate,
+  singleUserGet,
+  userGet,
 };
