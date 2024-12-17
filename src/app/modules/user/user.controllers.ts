@@ -46,7 +46,7 @@ const userGet = async (req: Request, res: Response) => {
 };
 
 /**
- * @Desc Get Singlr User Controller
+ * @Desc Get Single User Controller
  * @Param ID
  * @Method GET
  */
@@ -66,8 +66,53 @@ const singleUserGet = async (req: Request, res: Response) => {
     });
   }
 };
+/**
+ * @Desc Update Single User Controller
+ * @Param ID
+ * @Method PATCH
+ */
+const updateSingleUser = async (req: Request, res: Response) => {
+  try {
+    const result = await UserServices.singleUserUpdateFromDB(req.params.id, req.body);
+    res.json({
+      success: true,
+      message: 'Single User Updated Successful',
+      data: result,
+    });
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      message: 'Something Wrong',
+      error,
+    });
+  }
+};
+
+/**
+ * @Desc Delete Single User Controller
+ * @Param ID
+ * @Method DELETE
+ */
+const deleteSingleUser = async (req: Request, res: Response) => {
+  try {
+    const result = await UserServices.singleUserDeleteFromDB(req.params.id);
+    res.json({
+      success: true,
+      message: 'Single User Deleted Successful',
+      data: result,
+    });
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      message: 'Something Wrong',
+      error,
+    });
+  }
+};
 export const UserControllers = {
   userCreate,
   singleUserGet,
   userGet,
+  updateSingleUser,
+  deleteSingleUser,
 };

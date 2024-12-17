@@ -41,6 +41,7 @@ const userSchema = new Schema<TUser>(
         },
         message: 'Imvalid Email Format!',
       },
+      immutable: true,
     },
     age: {
       type: Number,
